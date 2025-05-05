@@ -36,8 +36,14 @@ export const updateAboutMe = async (req: Request, res: Response) => {
     } = req.body;
 
     // Clean education and experience arrays to remove aboutMeId
-    const cleanEducation = (education || []).map(({ aboutMeId, ...rest }) => rest);
-    const cleanExperience = (experience || []).map(({ aboutMeId, ...rest }) => rest);
+    const cleanEducation = (education || []).map((edu: any) => {
+      const { aboutMeId, ...rest } = edu;
+      return rest;
+    });
+    const cleanExperience = (experience || []).map((exp: any) => {
+      const { aboutMeId, ...rest } = exp;
+      return rest;
+    });
 
     // Get the current AboutMe record
     const currentAboutMe = await prisma.aboutMe.findFirst();
