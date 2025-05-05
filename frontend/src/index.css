@@ -1,0 +1,118 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    
+    --primary: 258 53% 75%;
+    --primary-foreground: 240 5.9% 10%;
+    
+    --secondary: 217 76% 38%;
+    --secondary-foreground: 0 0% 98%;
+    
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    
+    --accent: 210 48% 80%;
+    --accent-foreground: 0 0% 98%;
+    
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 168 85% 43%;
+    
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border selection:bg-purple-light/20 selection:text-white;
+  }
+  
+  body {
+    @apply bg-background text-foreground antialiased overflow-x-hidden;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-glass-bg backdrop-blur-lg border border-glass-border rounded-2xl;
+  }
+
+  .glass-card {
+    @apply glass shadow-xl;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-purple-light via-neon-sky to-neon-blue bg-clip-text text-transparent;
+  }
+  
+  .animate-delay-100 {
+    animation-delay: 100ms;
+  }
+  
+  .animate-delay-200 {
+    animation-delay: 200ms;
+  }
+  
+  .animate-delay-300 {
+    animation-delay: 300ms;
+  }
+  
+  .animate-delay-400 {
+    animation-delay: 400ms;
+  }
+
+  .animate-delay-500 {
+    animation-delay: 500ms;
+  }
+  
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  
+  .perspective-2000 {
+    perspective: 2000px;
+  }
+}
+
+/* Custom Cursor Styles */
+.custom-cursor {
+  @apply fixed pointer-events-none z-50 h-8 w-8 -ml-4 -mt-4 rounded-full border border-purple-light;
+  mix-blend-mode: difference;
+  transform: translate(var(--x), var(--y));
+}
+
+.custom-cursor-dot {
+  @apply fixed pointer-events-none z-50 h-3 w-3 -ml-1.5 -mt-1.5 rounded-full bg-neon-blue;
+  mix-blend-mode: difference;
+  transform: translate(var(--x), var(--y));
+}
+
+/* Typing cursor animation */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.typing-cursor {
+  animation: blink 1s step-end infinite;
+}

@@ -1,0 +1,106 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  username  String   @unique
+  password  String
+  isAdmin   Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Project {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  techStack   String[]
+  liveLink    String?
+  githubLink  String?
+  image       String
+  featured    Boolean  @default(false)
+  category    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Certificate {
+  id          String   @id @default(uuid())
+  title       String
+  issuingOrg  String
+  date        DateTime
+  image       String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model GalleryItem {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  image       String
+  category    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Rating {
+  id        String   @id @default(uuid())
+  score     Int
+  comment   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model AboutMe {
+  id           String       @id @default(uuid())
+  headline     String
+  bio          String
+  skills       String[]
+  education    Education[]
+  experience   Experience[]
+  interests    String[]
+  profileImage String
+  resumeFile   String?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+}
+
+model Education {
+  id          String   @id @default(uuid())
+  degree      String
+  institution String
+  year        String
+  description String?
+  aboutMe     AboutMe  @relation(fields: [aboutMeId], references: [id], onDelete: Cascade)
+  aboutMeId   String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Experience {
+  id          String   @id @default(uuid())
+  position    String
+  company     String
+  startDate   String
+  endDate     String?
+  current     Boolean  @default(false)
+  description String
+  aboutMe     AboutMe  @relation(fields: [aboutMeId], references: [id], onDelete: Cascade)
+  aboutMeId   String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

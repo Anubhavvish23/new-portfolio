@@ -1,0 +1,17 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm --prefix backend run build && npm --prefix frontend run build",
+    "start": "concurrently \"npm --prefix backend start\" \"npm --prefix frontend start\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}
